@@ -24,10 +24,10 @@ class HomeErrorState extends HomeState {
   List<Object?> get props => [];
 }
 
-class HomePostListState extends HomeState {
+class HomeRandomUserListState extends HomeState {
   final List<RandomUser> userList;
 
-  HomePostListState(this.userList);
+  HomeRandomUserListState(this.userList);
 
   @override
   List<Object> get props => [userList];

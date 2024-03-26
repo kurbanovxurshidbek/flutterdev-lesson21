@@ -17,12 +17,20 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   late HomeBloc homeBloc;
+  ScrollController scrollController = ScrollController();
 
   @override
   void initState() {
     super.initState();
     homeBloc = BlocProvider.of<HomeBloc>(context);
     homeBloc.add(LoadRandomUserListEvent());
+
+    scrollController.addListener(() {
+      if (scrollController.position.maxScrollExtent <= scrollController.offset) {
+        LogService.i(homeBloc.currentPage.toString());
+        homeBloc.add(LoadRandomUserListEvent());
+      }
+    });
   }
 
   @override
@@ -34,12 +42,16 @@ class _HomePageState extends State<HomePage> {
         title: const Text("Random User - BloC(Bloc)"),
       ),
       body: BlocBuilder<HomeBloc, HomeState>(
+        buildWhen: (previous, current){
+          //https://stackoverflow.com/questions/72105781/listview-update-via-bloc-pattern-issue
+          return current is HomeRandomUserListState;
+        },
         builder: (context, state) {
           if (state is HomeErrorState) {
             return viewOfError(state.errorMessage);
           }
 
-          if (state is HomePostListState) {
+          if (state is HomeRandomUserListState) {
             var userList = state.userList;
             return viewOfRandomUserList(userList);
           }
@@ -64,6 +76,7 @@ class _HomePageState extends State<HomePage> {
 
   Widget viewOfRandomUserList(List<RandomUser> userList) {
     return ListView.builder(
+      controller: scrollController,
       itemCount: userList.length,
       itemBuilder: (ctx, index) {
         return itemOfRandomUser(userList[index]);

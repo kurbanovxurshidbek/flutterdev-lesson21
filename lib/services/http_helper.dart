@@ -17,8 +17,8 @@ class HttpInterceptor implements InterceptorContract {
       // Fetching access token from your local
       var accessToken = "";
       // Clear previous header and update it with updated token
-      data.headers.clear();
-      data.headers['x-api-key'] = API_KEY;
+      //data.headers.clear();
+      //data.headers['x-api-key'] = API_KEY;
       data.headers['Content-type'] = 'application/json';
       LogService.i(data.toString());
     } catch (e) {

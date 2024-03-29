@@ -79,7 +79,7 @@ class _HomePageState extends State<HomePage> {
       controller: scrollController,
       itemCount: userList.length,
       itemBuilder: (ctx, index) {
-        return itemOfRandomUser(userList[index]);
+        return itemOfRandomUser(userList[index], index);
       },
     );
   }

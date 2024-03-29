@@ -32,8 +32,3 @@ class HomeRandomUserListState extends HomeState {
   @override
   List<Object> get props => [userList];
 }
-
-class HomeDeletePostState extends HomeState {
-  @override
-  List<Object> get props => [];
-}

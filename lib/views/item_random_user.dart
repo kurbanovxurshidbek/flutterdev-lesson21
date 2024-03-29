@@ -20,9 +20,6 @@ Widget itemOfRandomUser(RandomUser randomUser) {
               height: 80,
               width: 80,
               color: Colors.grey,
-              child: const Center(
-                child: CircularProgressIndicator(),
-              ),
             ),
             errorWidget: (context, url, error) => Container(
               height: 80,
